@@ -1,7 +1,7 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #pragma comment(lib, "Ws2_32.lib")
 
 #define SUCCESS 0
@@ -10,6 +10,22 @@
 #define DEFAULT_PORT "27015"
 char        hoststr[NI_MAXHOST],
 servstr[NI_MAXSERV];
+char okHeader[] = "HTTP/1.1 200 OK\n\
+Content-Type: text/html; charset=utf-8\n\
+Content-Length: {}\n\
+Connection: keep-alive\n\
+Cache-Control: s-maxage=300, public, max-age=0\n\
+Content-Language: en-US\n\
+Date: Thu, 06 Dec 2018 17:37:18 GMT\n\
+ETag: \"2e77ad1dc6ab0b53a2996dfd4653c1c3\"\n\
+Server: meinheld/0.6.1\n\
+Strict-Transport-Security: max-age=63072000\n\
+X-Content-Type-Options: nosniff\n\
+X-Frame-Options: DENY\n\
+X-XSS-Protection: 1; mode=block\n\
+Vary: Accept-Encoding, Cookie\n\
+Age: 7\n\n";
+
 char answer[] = "HTTP/1.1 200 OK\n\
 Content-Type: text/html; charset=utf-8\n\
 Content-Length: 178\n\
@@ -49,6 +65,25 @@ char testString[] = "<!DOCTYPE html>\n\
 </body>\n\
 </html>";
 
+char* loadFile(const char* path) {
+	
+	FILE *file = fopen(path,"r");
+
+	if (file == NULL) {
+		return (char*)"NO FILE";
+	}
+	char document[2048];
+	char line[256];
+	int index = 0;
+	while (fgets(line, 256, file)) {
+		for (int i = 0; line[i] && index < 2048; i++) {
+			document[index++] = line[i];
+		}
+	}
+	document[index] = '\0';
+	return document;
+}
+
 char** stringSplitter(char token, char* string) {
 	char* currentString = (char*)malloc(sizeof(char)*1024);
 	char** strings = (char**)malloc(sizeof(char*)*100);
@@ -81,8 +116,23 @@ bool checkGet(char* string) {
 	return true;
 }
 
+char* addStrings(char* s1, char* s2) {
+	int size = strlen(s1) + strlen(s2);
+	char* newString = (char*)malloc(sizeof(char)*size);
+	int i = 0;
+	for (; s1[i]; i++) {
+		newString[i] = s1[i];
+	}
+	for (int k = 0; s2[k]; k++) {
+		newString[i++] = s2[k];
+	}
+	newString[i] = '\0';
+	return newString;
+}
+
 int main() {
-	printf("%d\n",strlen(testString));
+	char* document = loadFile("index.html");
+	puts(document);
 	char recvbuf[DEFAULT_BUFLEN];
 	WSADATA wsadata;
 

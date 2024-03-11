@@ -1,1 +1,4 @@
-﻿  HttpServer.vcxproj -> C:\Users\Pasca\source\repos\HttpServer\x64\Debug\HttpServer.exe
+﻿  main.cpp
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(215,49): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(84,1): warning C4172: Adresse einer lokalen Variablen oder eines temporären Werts ": document" wird zurückgegeben
+  HttpServer.vcxproj -> C:\Users\Pasca\source\repos\HttpServer\x64\Debug\HttpServer.exe
