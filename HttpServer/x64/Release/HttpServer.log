@@ -1,0 +1,16 @@
+﻿  main.cpp
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(96,18): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(217,11): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(256,10): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(337,11): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(365,13): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(366,8): warning C4101: "firstPart": Unreferenzierte lokale Variable
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(367,8): warning C4101: "secondPart": Unreferenzierte lokale Variable
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(410,15): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Pasca\source\repos\HttpServer\HttpServer\main.cpp(535,55): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  Code wird generiert.
+  3 of 21 functions (14.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Codegenerierung ist abgeschlossen.
+  HttpServer.vcxproj -> C:\Users\Pasca\source\repos\HttpServer\x64\Release\HttpServer.exe
