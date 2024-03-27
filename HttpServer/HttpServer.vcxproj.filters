@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="index.html" />
+    <None Include="style.css" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHandler.h">

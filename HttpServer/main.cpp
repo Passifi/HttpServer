@@ -434,6 +434,25 @@ char* extractPath(char** value) {
 	
 }
 
+int contains(char* ref, char* cmp) {
+	char* ptr = cmp;
+	char* ptrRef = ref;
+	
+	while (*ptr != '\0') {
+		if (*cmp == *ptrRef) {
+			ptrRef++;
+			if (*ptrRef == '\0') {
+				return 1;
+			}
+		}
+		else {
+			ptrRef = ref;
+		}
+		ptr++;
+	}
+	return 0;
+}
+
 int main() {
 
 	char recvbuf[DEFAULT_BUFLEN];
@@ -442,6 +461,7 @@ int main() {
 	int iResult,iSendResult;
 	int recvbuflen = DEFAULT_BUFLEN;
 	struct addrinfo* result = NULL, * ptr = NULL, hints;
+	begin:
 	iResult = WSAStartup(MAKEWORD(2,2),&wsadata);
 	if (iResult != 0) {
 		printf("WSAStartup failed: %d\n", iResult);
@@ -455,7 +475,7 @@ int main() {
 	hints.ai_protocol = IPPROTO_TCP;
 	hints.ai_flags = AI_PASSIVE;
 
-	iResult = getaddrinfo(NULL,DEFAULT_PORT,&hints,&result);
+	iResult = getaddrinfo(NULL,"112", &hints, &result);
 	if (iResult != 0) {
 		printf("getaddrinfo Failed: %d\n", iResult);
 		WSACleanup();
@@ -532,7 +552,12 @@ int main() {
 			printf("%s", recvbuf);
 			if(checkGet(strings[0])) {
 				char* path = extractPath(strings);
-				
+				if (contains(path, (char*)"css")) {
+					resp.contentType = (char*)"Content-type: text/css;";
+				}
+				else {
+					resp.contentType = (char*)"Content-type: text/html; charset=utf-8";
+				}
 				char* returnValue = createAnswerFromStruct(resp,path);
 				iSendResult = send(ClientSocket,returnValue,strlen(returnValue), 0);
 
@@ -569,6 +594,7 @@ int main() {
 		return 1;
 	}
 	closesocket(ClientSocket);
+	goto begin;
 	WSACleanup();
 
 	return SUCCESS;
